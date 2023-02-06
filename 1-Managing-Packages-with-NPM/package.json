@@ -1,0 +1,19 @@
+{
+	"name": "fcc-learn-npm-package-json",
+	"author": "Karine Nicel Rostirola Ballardin",
+	"description": "FreeCodeCamp learning project on using package.json in Node.js application development",
+	"keywords": [ "freecodecamp", "back-end", "challenges", "APIs", "development"],
+	"license": "MIT",
+	"version": "0.0.1",
+	"dependencies": {
+		"express": "^4.18.2"
+	},
+	"main": "server.js",
+	"scripts": {
+		"start": "node server.js"
+	},
+	"repository": {
+		"type": "git",
+		"url": "https://idontknow/todo.git"
+	}
+}
