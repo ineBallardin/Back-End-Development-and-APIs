@@ -153,31 +153,3 @@ app.post('/name', (req, res) => {
 
 
 module.exports = app;
-
-//INTRO 
-// me apresentar 5 min
-    // NOME
-    // LOCALIZAÇÃO
-    // FUNÇÃO NA IMPULSO E BYJUS
-        // CM
-    // HOBBIES
-
-// 10 min - 15 min
-// PERGUNTAR:
-    // NOME
-    // CIDADE
-    // SE JÁ ESTÁ ATUANDO NA ÁREA OU EM TRANSIÇÃO DE CARREIRA
-
-// FALAR DISCORD
-    // AÇÕES
-        // CLUBE DO LIVRO
-        // CHALLENGES
-        // MULHERES EM TI
-        // MONTE-SEU-PERFIL
-        // COWORKING
-        // BLOG
-        // ENGLISH
-        // EVENTOS
-            // PAPO-CABEÇA: ANSIEDADE
-            // CLUBE DO LIVRO
-
