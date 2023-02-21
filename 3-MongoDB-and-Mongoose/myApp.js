@@ -7,13 +7,8 @@ mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopol
 // 02 - Create a Model
 const Schema = mongoose.Schema;
 const personSchema = new Schema({
-  name: {
-    type: String,
-    required: true
-  },
-  age: {
-    type: Number,
-  },
+  name: { type: String, required: true },
+  age: { type: Number },
   favoriteFoods : [String]
 })
 
@@ -52,7 +47,7 @@ const createManyPeople = (arrayOfPeople, done) => {
 
 // 05 - Use model.find() to Search Your Database
 const findPeopleByName = (personName, done) => {  
-  Person.find({name: personName}, (err, matches) => {
+  Person.find({ name: personName }, (err, matches) => {
     if (err) return console.error(err)
     
     console.log(matches)
@@ -60,15 +55,16 @@ const findPeopleByName = (personName, done) => {
   })
 };
 
-
+// 06 - Use model.findOne() to Return a Single Matching Document from Your Database
 const findOneByFood = (food, done) => {
-  Person.findOne({favoriteFoods: food}, (err, person) => {
+  Person.findOne({ favoriteFoods: food }, (err, person) => {
     if (err) return console.error(err)
     
     done(null, person);
   })
 };
 
+// 07 - Use model.findById() to Search Your Database By _id
 const findPersonById = (personId, done) => {
   Person.findById(personId, (err, person) => {
     if (err) return console.error(err)
@@ -77,6 +73,7 @@ const findPersonById = (personId, done) => {
   })
 };
 
+// 08 - Perform Classic Updates by Running Find, Edit, then Save
 const findEditThenSave = (personId, done) => {
   const foodToAdd = "hamburger";
 
@@ -93,33 +90,49 @@ const findEditThenSave = (personId, done) => {
   })
 };
 
+// 09 - Perform New Updates on a Document Using model.findOneAndUpdate()
 const findAndUpdate = (personName, done) => {
   const ageToSet = 20;
 
-  done(null /*, data*/);
+  Person.findOneAndUpdate({ name: personName }, { age: ageToSet },{ new: true }, (err, personUpdated) => {
+    if (err) return console.error(err)
+
+    done(null, personUpdated)
+  })
 };
 
+ // 10 - Delete One Document Using model.findByIdAndRemove
 const removeById = (personId, done) => {
-  done(null /*, data*/);
+  Person.findByIdAndRemove(personId, (err, personRemoved) => {
+    if (err) return console.error(err)
+
+    done(null, personRemoved)
+  })
 };
 
+// 11 - Delete Many Documents with model.remove()
 const removeManyPeople = (done) => {
   const nameToRemove = "Mary";
+  Person.remove({ name: nameToRemove }, (err, removedPerson) => {
+    if (err) return console.error(err)
 
-  done(null /*, data*/);
+    done(null, removedPerson);
+  })
 };
 
+// 12 - Chain Search Query Helpers to Narrow Search Results
 const queryChain = (done) => {
   const foodToSearch = "burrito";
+  const query = Person.find({ favoriteFoods: foodToSearch })
+    .sort({ name: 1 })
+    .limit(2)
+    .select({ age: 0 })
+    .exec((err, matches) => {
+    if (err) return console.error(err)
 
-  done(null /*, data*/);
+    done(null, matches);
+  })
 };
-
-/** **Well Done !!**
-/* You completed these challenges, let's go celebrate !
- */
-
-//----- **DO NOT EDIT BELOW THIS LINE** ----------------------------------
 
 exports.PersonModel = Person;
 exports.createAndSavePerson = createAndSavePerson;
